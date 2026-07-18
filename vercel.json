@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "builds": [
+    {
+      "src": "nestjs-app/public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/nestjs-app/public/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/nestjs-app/public/$1"
+    }
+  ]
+}
