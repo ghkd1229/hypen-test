@@ -13,6 +13,7 @@ const photoCards = [...document.querySelectorAll('.photo-card')];
 const photoClose = document.querySelector('.photos-close');
 const photoViewport = document.querySelector('.photo-viewport');
 const aboutLink = document.querySelector('.nav-links a[href="#about"]');
+const heroAboutLink = document.querySelector('.hero-about-link');
 const letteringFrame = document.querySelector('.lettering-frame');
 const musicModal = document.querySelector('.music-modal');
 const musicOpen = document.querySelector('.music-jump');
@@ -20,7 +21,7 @@ const musicClose = document.querySelector('.music-close');
 const musicStage = document.querySelector('.music-stage');
 
 document.querySelectorAll('.checker').forEach((checker) => {
-  const palette = ['#ffffff', '#e7ddf9', '#e7ddf9'];
+  const palette = ['transparent', '#e7ddf9', '#e7ddf9'];
   const cellColors = [
     0, 1, 0, 1, 0, 2, 0, 2, 0,
     2, 0, 1, 0, 2, 0, 1, 0, 2,
@@ -35,6 +36,7 @@ document.querySelectorAll('.checker').forEach((checker) => {
 });
 
 if (!reduceMotion) {
+  const interactiveSelector = 'a, button, .hero-word, .university-pill, .photo-viewport, .music-card';
   let pointerX = -50;
   let pointerY = -50;
   let cursorX = -50;
@@ -44,12 +46,9 @@ if (!reduceMotion) {
     pointerX = event.clientX;
     pointerY = event.clientY;
     cursor.classList.remove('is-hidden');
+    cursor.classList.toggle('is-active', Boolean(event.target.closest(interactiveSelector)));
   });
   document.documentElement.addEventListener('mouseleave', () => cursor.classList.add('is-hidden'));
-  document.querySelectorAll('a, button, .hero-word, .photo-viewport').forEach((element) => {
-    element.addEventListener('mouseenter', () => cursor.classList.add('is-active'));
-    element.addEventListener('mouseleave', () => cursor.classList.remove('is-active'));
-  });
 
   const renderCursor = () => {
     cursorX += (pointerX - cursorX) * 0.22;
@@ -87,13 +86,15 @@ copyButton.addEventListener('click', async () => {
   window.setTimeout(() => copyStatus.classList.remove('is-shown'), 1400);
 });
 
-aboutLink.addEventListener('click', (event) => {
+const moveToAbout = (event) => {
   event.preventDefault();
   const frameTop = letteringFrame.getBoundingClientRect().top + window.scrollY;
   const targetTop = frameTop + letteringFrame.offsetHeight / 2 - window.innerHeight / 2 - 50;
   history.replaceState(null, '', '#about');
   window.scrollTo({ top: Math.max(0, targetTop), behavior: reduceMotion ? 'auto' : 'smooth' });
-});
+};
+aboutLink.addEventListener('click', moveToAbout);
+heroAboutLink.addEventListener('click', moveToAbout);
 
 document.querySelector('.photo-jump').addEventListener('click', () => {
   photos.classList.add('is-open');
