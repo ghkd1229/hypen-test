@@ -138,9 +138,11 @@ if (!reduceMotion) {
   let lastNoteAt = 0;
   let lastSoundAt = 0;
 
-  const playPuppyNote = () => {
+  const playPuppyNote = (isHead) => {
     if (!musicAudioContext || musicAudioContext.state !== 'running') return;
     const now = musicAudioContext.currentTime;
+    const startPitch = isHead ? 540 : 265;
+    const endPitch = isHead ? 345 : 155;
 
     const master = musicAudioContext.createGain();
     const growl = musicAudioContext.createOscillator();
@@ -151,39 +153,42 @@ if (!reduceMotion) {
     const noiseData = noiseBuffer.getChannelData(0);
     for (let index = 0; index < noiseData.length; index += 1) noiseData[index] = Math.random() * 2 - 1;
 
-    growl.type = 'sawtooth';
-    growl.frequency.setValueAtTime(118, now);
-    growl.frequency.exponentialRampToValueAtTime(62, now + .22);
+    growl.type = 'triangle';
+    growl.frequency.setValueAtTime(startPitch, now);
+    growl.frequency.exponentialRampToValueAtTime(endPitch, now + .18);
     growlFilter.type = 'lowpass';
-    growlFilter.frequency.setValueAtTime(720, now);
-    growlFilter.frequency.exponentialRampToValueAtTime(260, now + .24);
-    growlFilter.Q.value = 5.5;
+    growlFilter.frequency.setValueAtTime(isHead ? 1550 : 820, now);
+    growlFilter.frequency.exponentialRampToValueAtTime(isHead ? 720 : 360, now + .2);
+    growlFilter.Q.value = 3.2;
     noiseSource.buffer = noiseBuffer;
     noiseFilter.type = 'bandpass';
-    noiseFilter.frequency.setValueAtTime(560, now);
-    noiseFilter.frequency.exponentialRampToValueAtTime(190, now + .2);
-    noiseFilter.Q.value = 2.3;
+    noiseFilter.frequency.setValueAtTime(isHead ? 980 : 480, now);
+    noiseFilter.frequency.exponentialRampToValueAtTime(isHead ? 520 : 230, now + .18);
+    noiseFilter.Q.value = 1.8;
     master.gain.setValueAtTime(.0001, now);
-    master.gain.exponentialRampToValueAtTime(.075, now + .014);
-    master.gain.exponentialRampToValueAtTime(.024, now + .095);
-    master.gain.exponentialRampToValueAtTime(.0001, now + .27);
+    master.gain.exponentialRampToValueAtTime(isHead ? .042 : .05, now + .012);
+    master.gain.exponentialRampToValueAtTime(.016, now + .085);
+    master.gain.exponentialRampToValueAtTime(.0001, now + .23);
     growl.connect(growlFilter).connect(master);
     noiseSource.connect(noiseFilter).connect(master);
     master.connect(musicAudioContext.destination);
     growl.start(now);
     noiseSource.start(now);
-    growl.stop(now + .28);
-    noiseSource.stop(now + .28);
+    growl.stop(now + .24);
+    noiseSource.stop(now + .24);
   };
 
   musicBackground.addEventListener('mousemove', (event) => {
     const now = performance.now();
+    const stageRect = musicStage.getBoundingClientRect();
+    const pointerRatioX = Math.max(-1, Math.min(1, (event.clientX - (stageRect.left + stageRect.width / 2)) / (stageRect.width / 2)));
+    const pointerRatioY = (event.clientY - stageRect.top) / stageRect.height;
+    musicBackground.style.setProperty('--dog-tilt', `${(pointerRatioX * 15).toFixed(2)}deg`);
     const horizontalMove = lastMusicX === null ? 0 : Math.abs(event.clientX - lastMusicX);
     lastMusicX = event.clientX;
     if (horizontalMove < 7 || now - lastNoteAt < 85) return;
     lastNoteAt = now;
 
-    const stageRect = musicStage.getBoundingClientRect();
     const scale = stageRect.width / musicStage.offsetWidth || 1;
     const note = document.createElement('span');
     note.className = 'music-note';
@@ -196,10 +201,13 @@ if (!reduceMotion) {
     note.addEventListener('animationend', () => note.remove(), { once: true });
     if (now - lastSoundAt >= 170) {
       lastSoundAt = now;
-      playPuppyNote();
+      playPuppyNote(pointerRatioY < .56);
     }
   });
-  musicBackground.addEventListener('mouseleave', () => { lastMusicX = null; });
+  musicBackground.addEventListener('mouseleave', () => {
+    lastMusicX = null;
+    musicBackground.style.setProperty('--dog-tilt', '0deg');
+  });
 }
 
 const revealObserver = new IntersectionObserver((entries) => {

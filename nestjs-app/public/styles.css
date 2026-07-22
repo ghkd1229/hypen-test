@@ -157,7 +157,7 @@ body.photos-open { overflow: hidden; }
 .music-modal.is-open { display: block; animation: modal-in 520ms cubic-bezier(.22, 1, .36, 1) forwards; }
 .music-panel { position: relative; height: 100vh; min-height: 720px; overflow: hidden; background: #fff; }
 .music-stage { --music-scale: 1; position: absolute; z-index: 1; left: 50%; top: 162px; width: 1302px; height: 862px; transform: translateX(-50%) scale(var(--music-scale)); transform-origin: top center; }
-.music-background { position: absolute; inset: 0; width: 1302px; height: 862px; object-fit: cover; }
+.music-background { position: absolute; inset: 0; width: 1302px; height: 862px; object-fit: cover; transform: rotate(var(--dog-tilt, 0deg)); transform-origin: center; transition: transform 140ms cubic-bezier(.22, 1, .36, 1); will-change: transform; }
 .music-caption { position: absolute; z-index: 2; left: 3.95%; top: 70px; margin: 0; color: #000; font-size: 24px; font-weight: 400; letter-spacing: -.02em; }
 .music-close { position: absolute; z-index: 5; right: 3.95%; top: 58px; border: 1px solid #1f1f1f; border-radius: 999px; color: #1f1f1f; background: rgba(255,255,255,.7); padding: 8px 18px; }
 .music-card { position: absolute; z-index: 3; top: 88px; width: 211.159px; height: 314px; margin: 0; padding: 8.543px 9.2px 28.256px 9.857px; border: .46px solid #fff; border-radius: 5.52px; background: linear-gradient(147deg, rgba(217,217,217,.3), rgba(115,115,115,0)); box-shadow: 0 2.434px 24.341px rgba(0,0,0,.15); backdrop-filter: blur(5.751px); }
