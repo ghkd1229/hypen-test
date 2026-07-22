@@ -134,37 +134,46 @@ musicClose.addEventListener('click', () => {
 
 if (!reduceMotion) {
   const noteGlyphs = ['♪', '♫', '♩'];
-  const nurseryPitches = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 783.99, 523.25];
   let lastMusicX = null;
   let lastNoteAt = 0;
   let lastSoundAt = 0;
-  let pitchIndex = 0;
 
   const playPuppyNote = () => {
     if (!musicAudioContext || musicAudioContext.state !== 'running') return;
     const now = musicAudioContext.currentTime;
-    const pitch = nurseryPitches[pitchIndex % nurseryPitches.length];
-    pitchIndex += 1;
 
-    const gain = musicAudioContext.createGain();
-    const voice = musicAudioContext.createOscillator();
-    const sparkle = musicAudioContext.createOscillator();
-    voice.type = 'triangle';
-    sparkle.type = 'sine';
-    voice.frequency.setValueAtTime(pitch * 1.34, now);
-    voice.frequency.exponentialRampToValueAtTime(pitch * .86, now + .12);
-    sparkle.frequency.setValueAtTime(pitch * 2.02, now);
-    sparkle.frequency.exponentialRampToValueAtTime(pitch * 1.35, now + .09);
-    gain.gain.setValueAtTime(.0001, now);
-    gain.gain.exponentialRampToValueAtTime(.035, now + .012);
-    gain.gain.exponentialRampToValueAtTime(.0001, now + .16);
-    voice.connect(gain);
-    sparkle.connect(gain);
-    gain.connect(musicAudioContext.destination);
-    voice.start(now);
-    sparkle.start(now);
-    voice.stop(now + .17);
-    sparkle.stop(now + .13);
+    const master = musicAudioContext.createGain();
+    const growl = musicAudioContext.createOscillator();
+    const growlFilter = musicAudioContext.createBiquadFilter();
+    const noiseFilter = musicAudioContext.createBiquadFilter();
+    const noiseSource = musicAudioContext.createBufferSource();
+    const noiseBuffer = musicAudioContext.createBuffer(1, Math.ceil(musicAudioContext.sampleRate * .28), musicAudioContext.sampleRate);
+    const noiseData = noiseBuffer.getChannelData(0);
+    for (let index = 0; index < noiseData.length; index += 1) noiseData[index] = Math.random() * 2 - 1;
+
+    growl.type = 'sawtooth';
+    growl.frequency.setValueAtTime(118, now);
+    growl.frequency.exponentialRampToValueAtTime(62, now + .22);
+    growlFilter.type = 'lowpass';
+    growlFilter.frequency.setValueAtTime(720, now);
+    growlFilter.frequency.exponentialRampToValueAtTime(260, now + .24);
+    growlFilter.Q.value = 5.5;
+    noiseSource.buffer = noiseBuffer;
+    noiseFilter.type = 'bandpass';
+    noiseFilter.frequency.setValueAtTime(560, now);
+    noiseFilter.frequency.exponentialRampToValueAtTime(190, now + .2);
+    noiseFilter.Q.value = 2.3;
+    master.gain.setValueAtTime(.0001, now);
+    master.gain.exponentialRampToValueAtTime(.075, now + .014);
+    master.gain.exponentialRampToValueAtTime(.024, now + .095);
+    master.gain.exponentialRampToValueAtTime(.0001, now + .27);
+    growl.connect(growlFilter).connect(master);
+    noiseSource.connect(noiseFilter).connect(master);
+    master.connect(musicAudioContext.destination);
+    growl.start(now);
+    noiseSource.start(now);
+    growl.stop(now + .28);
+    noiseSource.stop(now + .28);
   };
 
   musicBackground.addEventListener('mousemove', (event) => {
