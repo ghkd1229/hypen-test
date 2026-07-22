@@ -20,6 +20,7 @@ const musicOpen = document.querySelector('.music-jump');
 const musicClose = document.querySelector('.music-close');
 const musicStage = document.querySelector('.music-stage');
 const musicBackground = document.querySelector('.music-background');
+let musicAudioContext = null;
 
 document.querySelectorAll('.checker').forEach((checker) => {
   const palette = ['transparent', '#e7ddf9', '#e7ddf9'];
@@ -110,6 +111,9 @@ photoClose.addEventListener('click', () => {
 });
 
 musicOpen.addEventListener('click', () => {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (AudioContextClass && !musicAudioContext) musicAudioContext = new AudioContextClass();
+  if (musicAudioContext?.state === 'suspended') musicAudioContext.resume();
   renderMusicStage();
   musicModal.classList.add('is-open');
   musicModal.setAttribute('aria-hidden', 'false');
@@ -130,8 +134,38 @@ musicClose.addEventListener('click', () => {
 
 if (!reduceMotion) {
   const noteGlyphs = ['♪', '♫', '♩'];
+  const nurseryPitches = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 783.99, 523.25];
   let lastMusicX = null;
   let lastNoteAt = 0;
+  let lastSoundAt = 0;
+  let pitchIndex = 0;
+
+  const playPuppyNote = () => {
+    if (!musicAudioContext || musicAudioContext.state !== 'running') return;
+    const now = musicAudioContext.currentTime;
+    const pitch = nurseryPitches[pitchIndex % nurseryPitches.length];
+    pitchIndex += 1;
+
+    const gain = musicAudioContext.createGain();
+    const voice = musicAudioContext.createOscillator();
+    const sparkle = musicAudioContext.createOscillator();
+    voice.type = 'triangle';
+    sparkle.type = 'sine';
+    voice.frequency.setValueAtTime(pitch * 1.34, now);
+    voice.frequency.exponentialRampToValueAtTime(pitch * .86, now + .12);
+    sparkle.frequency.setValueAtTime(pitch * 2.02, now);
+    sparkle.frequency.exponentialRampToValueAtTime(pitch * 1.35, now + .09);
+    gain.gain.setValueAtTime(.0001, now);
+    gain.gain.exponentialRampToValueAtTime(.035, now + .012);
+    gain.gain.exponentialRampToValueAtTime(.0001, now + .16);
+    voice.connect(gain);
+    sparkle.connect(gain);
+    gain.connect(musicAudioContext.destination);
+    voice.start(now);
+    sparkle.start(now);
+    voice.stop(now + .17);
+    sparkle.stop(now + .13);
+  };
 
   musicBackground.addEventListener('mousemove', (event) => {
     const now = performance.now();
@@ -151,6 +185,10 @@ if (!reduceMotion) {
     note.style.setProperty('--note-rotate', `${Math.round((Math.random() - .5) * 30)}deg`);
     musicStage.append(note);
     note.addEventListener('animationend', () => note.remove(), { once: true });
+    if (now - lastSoundAt >= 170) {
+      lastSoundAt = now;
+      playPuppyNote();
+    }
   });
   musicBackground.addEventListener('mouseleave', () => { lastMusicX = null; });
 }
