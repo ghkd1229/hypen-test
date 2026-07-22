@@ -19,6 +19,7 @@ const musicModal = document.querySelector('.music-modal');
 const musicOpen = document.querySelector('.music-jump');
 const musicClose = document.querySelector('.music-close');
 const musicStage = document.querySelector('.music-stage');
+const musicBackground = document.querySelector('.music-background');
 
 document.querySelectorAll('.checker').forEach((checker) => {
   const palette = ['transparent', '#e7ddf9', '#e7ddf9'];
@@ -126,6 +127,33 @@ musicClose.addEventListener('click', () => {
   musicModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('music-open');
 });
+
+if (!reduceMotion) {
+  const noteGlyphs = ['♪', '♫', '♩'];
+  let lastMusicX = null;
+  let lastNoteAt = 0;
+
+  musicBackground.addEventListener('mousemove', (event) => {
+    const now = performance.now();
+    const horizontalMove = lastMusicX === null ? 0 : Math.abs(event.clientX - lastMusicX);
+    lastMusicX = event.clientX;
+    if (horizontalMove < 7 || now - lastNoteAt < 85) return;
+    lastNoteAt = now;
+
+    const stageRect = musicStage.getBoundingClientRect();
+    const scale = stageRect.width / musicStage.offsetWidth || 1;
+    const note = document.createElement('span');
+    note.className = 'music-note';
+    note.textContent = noteGlyphs[Math.floor(Math.random() * noteGlyphs.length)];
+    note.style.left = `${(event.clientX - stageRect.left) / scale}px`;
+    note.style.top = `${(event.clientY - stageRect.top) / scale}px`;
+    note.style.setProperty('--note-drift', `${Math.round((Math.random() - .5) * 54)}px`);
+    note.style.setProperty('--note-rotate', `${Math.round((Math.random() - .5) * 30)}deg`);
+    musicStage.append(note);
+    note.addEventListener('animationend', () => note.remove(), { once: true });
+  });
+  musicBackground.addEventListener('mouseleave', () => { lastMusicX = null; });
+}
 
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {

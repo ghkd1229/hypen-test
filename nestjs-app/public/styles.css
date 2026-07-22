@@ -94,8 +94,8 @@ body.intro-done .nav-logo { opacity: 1; }
   padding: 0;
   overflow: hidden;
 }
-.hero h1 { position: absolute; left: 50%; top: 350px; width: max-content; transform: translateX(-50%); margin: 0; text-align: center; color: #90b7f9; font-family: Caveat, cursive; font-size: clamp(72px, 8.68vw, 125px); font-weight: 400; line-height: 106px; letter-spacing: 0; }
-.hero-decoration { position: absolute; z-index: 1; left: 50%; top: 235px; width: min(22vw, 317px); aspect-ratio: 393 / 121; transform: translateX(-50%); overflow: hidden; border-radius: 2px; }
+.hero h1 { position: absolute; left: 50%; top: 368px; width: max-content; transform: translateX(-50%); margin: 0; text-align: center; color: #90b7f9; font-family: Caveat, cursive; font-size: clamp(72px, 8.68vw, 125px); font-weight: 400; line-height: 106px; letter-spacing: 0; }
+.hero-decoration { position: absolute; z-index: 1; left: 50%; top: 253px; width: min(22vw, 317px); aspect-ratio: 393 / 121; transform: translateX(-50%); overflow: hidden; border-radius: 2px; }
 .hero-decoration img { position: absolute; left: -24.78%; top: -242.43%; width: 149.75%; height: 648.5%; display: block; max-width: none; }
 .hero-line { display: block; overflow: visible; }
 .hero-about-link { display: block; color: inherit; }
@@ -165,8 +165,10 @@ body.photos-open { overflow: hidden; }
 .music-card.frame-4 { left: -12px; }
 .music-card.frame-10 { left: 1093px; }
 .music-card:hover { animation: small-orbit 1300ms linear infinite; }
+.music-note { position: absolute; z-index: 2; left: 0; top: 0; color: #90b7f9; font-family: Caveat, cursive; font-size: 34px; line-height: 1; opacity: 0; pointer-events: none; text-shadow: 0 2px 10px rgba(144,183,249,.28); animation: music-note-rise 1100ms cubic-bezier(.22, 1, .36, 1) forwards; }
 body.music-open { overflow: hidden; }
 @keyframes small-orbit { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(8px, -8px); } 50% { transform: translate(16px, 0); } 75% { transform: translate(8px, 8px); } }
+@keyframes music-note-rise { 0% { opacity: 0; transform: translate(-50%, 4px) rotate(-8deg) scale(.7); } 18% { opacity: .9; } 100% { opacity: 0; transform: translate(calc(-50% + var(--note-drift)), -78px) rotate(var(--note-rotate)) scale(1.18); } }
 
 @media (max-width: 900px) {
   :root { --page-pad: 24px; }
@@ -178,8 +180,8 @@ body.music-open { overflow: hidden; }
   .nav-links { gap: 20px; font-size: 14px; }
   .email-wrap { font-size: 13px; }
   .hero { height: 760px; }
-  .hero h1 { top: 230px; font-size: clamp(68px, 16vw, 120px); line-height: .9; }
-  .hero-decoration { top: 145px; width: min(55vw, 250px); }
+  .hero h1 { top: 248px; font-size: clamp(68px, 16vw, 120px); line-height: .9; }
+  .hero-decoration { top: 163px; width: min(55vw, 250px); }
   .about { height: auto; min-height: 1024px; padding: 70px 24px; }
   .about-content { flex-direction: column; align-items: center; gap: 44px; margin-top: 70px; }
   .about-content > :nth-child(1), .about-content > :nth-child(2) { margin-right: 0; }
