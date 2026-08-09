@@ -23,7 +23,7 @@ const musicBackground = document.querySelector('.music-background');
 let musicAudioContext = null;
 
 document.querySelectorAll('.checker').forEach((checker) => {
-  const palette = ['transparent', '#e7ddf9', '#e7ddf9'];
+  const palette = ['#ffffff', '#515151', '#515151'];
   const cellColors = [
     0, 1, 0, 1, 0, 2, 0, 2, 0,
     2, 0, 1, 0, 2, 0, 1, 0, 2,
