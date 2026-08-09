@@ -1,296 +1,105 @@
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-if (window.location.hash) history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
-window.scrollTo(0, 0);
-const cursor = document.querySelector('.cursor-dot');
-const header = document.querySelector('.site-header');
-const copyButton = document.querySelector('.copy-email');
-const copyStatus = document.querySelector('.copy-status');
-const about = document.querySelector('.about');
-const photos = document.querySelector('.photos-modal');
-const photoTrack = document.querySelector('.photo-track');
-const photoCards = [...document.querySelectorAll('.photo-card')];
-const photoClose = document.querySelector('.photos-close');
-const photoViewport = document.querySelector('.photo-viewport');
-const aboutLink = document.querySelector('.nav-links a[href="#about"]');
-const heroAboutLink = document.querySelector('.hero-about-link');
-const letteringFrame = document.querySelector('.lettering-frame');
-const musicModal = document.querySelector('.music-modal');
-const musicOpen = document.querySelector('.music-jump');
-const musicClose = document.querySelector('.music-close');
-const musicStage = document.querySelector('.music-stage');
-const musicBackground = document.querySelector('.music-background');
-let musicAudioContext = null;
+document.addEventListener('DOMContentLoaded', () => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const intro = document.querySelector('.intro');
+  const introFill = document.querySelector('.intro-fill');
+  const introPercent = document.querySelector('.intro-percent');
+  const header = document.querySelector('.site-header');
 
-document.querySelectorAll('.checker').forEach((checker) => {
-  const palette = ['#ffffff', '#515151', '#515151'];
-  const cellColors = [
-    0, 1, 0, 1, 0, 2, 0, 2, 0,
-    2, 0, 1, 0, 2, 0, 1, 0, 2,
-    0, 2, 0, 1, 0, 2, 0, 1, 0,
-  ];
-  for (let index = 0; index < 27; index += 1) {
-    const cell = document.createElement('span');
-    cell.className = 'checker-cell';
-    cell.style.setProperty('--cell-color', palette[cellColors[index]]);
-    checker.append(cell);
-  }
-});
+  window.history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
 
-if (!reduceMotion) {
-  const interactiveSelector = 'a, button, .hero-word, .university-pill, .photo-viewport, .music-card';
-  let pointerX = -50;
-  let pointerY = -50;
-  let cursorX = -50;
-  let cursorY = -50;
-
-  window.addEventListener('mousemove', (event) => {
-    pointerX = event.clientX;
-    pointerY = event.clientY;
-    cursor.classList.remove('is-hidden');
-    cursor.classList.toggle('is-active', Boolean(event.target.closest(interactiveSelector)));
-  });
-  document.documentElement.addEventListener('mouseleave', () => cursor.classList.add('is-hidden'));
-
-  const renderCursor = () => {
-    cursorX += (pointerX - cursorX) * 0.22;
-    cursorY += (pointerY - cursorY) * 0.22;
-    cursor.style.left = `${cursorX}px`;
-    cursor.style.top = `${cursorY}px`;
-    requestAnimationFrame(renderCursor);
-  };
-  renderCursor();
-}
-
-const finishIntro = () => {
-  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-  document.body.classList.remove('is-loading');
-  document.body.classList.add('intro-done');
-};
-
-if (reduceMotion) finishIntro();
-else window.setTimeout(finishIntro, 3400);
-window.addEventListener('load', () => window.scrollTo(0, 0), { once: true });
-
-copyButton.addEventListener('click', async () => {
-  const email = copyButton.dataset.email;
-  try {
-    await navigator.clipboard.writeText(email);
-  } catch {
-    const input = document.createElement('textarea');
-    input.value = email;
-    document.body.append(input);
-    input.select();
-    document.execCommand('copy');
-    input.remove();
-  }
-  copyStatus.classList.add('is-shown');
-  window.setTimeout(() => copyStatus.classList.remove('is-shown'), 1400);
-});
-
-const moveToAbout = (event) => {
-  event.preventDefault();
-  const frameTop = letteringFrame.getBoundingClientRect().top + window.scrollY;
-  const targetTop = frameTop + letteringFrame.offsetHeight / 2 - window.innerHeight / 2 - 50;
-  history.replaceState(null, '', '#about');
-  window.scrollTo({ top: Math.max(0, targetTop), behavior: reduceMotion ? 'auto' : 'smooth' });
-};
-aboutLink.addEventListener('click', moveToAbout);
-heroAboutLink.addEventListener('click', moveToAbout);
-
-document.querySelector('.photo-jump').addEventListener('click', () => {
-  photos.classList.add('is-open');
-  photos.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('photos-open');
-  photoViewport.focus({ preventScroll: true });
-});
-photoClose.addEventListener('click', () => {
-  photos.classList.remove('is-open');
-  photos.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('photos-open');
-});
-
-musicOpen.addEventListener('click', () => {
-  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-  if (AudioContextClass && !musicAudioContext) musicAudioContext = new AudioContextClass();
-  if (musicAudioContext?.state === 'suspended') musicAudioContext.resume();
-  renderMusicStage();
-  musicModal.classList.add('is-open');
-  musicModal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('music-open');
-});
-
-const renderMusicStage = () => {
-  const availableHeight = Math.max(360, window.innerHeight - 162);
-  const availableWidth = Math.max(320, window.innerWidth - 24);
-  const scale = Math.min(1, availableHeight / 862, availableWidth / 1302);
-  musicStage.style.setProperty('--music-scale', scale.toFixed(4));
-};
-musicClose.addEventListener('click', () => {
-  musicModal.classList.remove('is-open');
-  musicModal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('music-open');
-});
-
-if (!reduceMotion) {
-  const noteGlyphs = ['♪', '♫', '♩'];
-  let lastMusicX = null;
-  let lastNoteAt = 0;
-  let lastSoundAt = 0;
-
-  const playPuppyNote = (isHead) => {
-    if (!musicAudioContext || musicAudioContext.state !== 'running') return;
-    const now = musicAudioContext.currentTime;
-    const startPitch = isHead ? 540 : 265;
-    const endPitch = isHead ? 345 : 155;
-
-    const master = musicAudioContext.createGain();
-    const growl = musicAudioContext.createOscillator();
-    const growlFilter = musicAudioContext.createBiquadFilter();
-    const noiseFilter = musicAudioContext.createBiquadFilter();
-    const noiseSource = musicAudioContext.createBufferSource();
-    const noiseBuffer = musicAudioContext.createBuffer(1, Math.ceil(musicAudioContext.sampleRate * .28), musicAudioContext.sampleRate);
-    const noiseData = noiseBuffer.getChannelData(0);
-    for (let index = 0; index < noiseData.length; index += 1) noiseData[index] = Math.random() * 2 - 1;
-
-    growl.type = 'triangle';
-    growl.frequency.setValueAtTime(startPitch, now);
-    growl.frequency.exponentialRampToValueAtTime(endPitch, now + .18);
-    growlFilter.type = 'lowpass';
-    growlFilter.frequency.setValueAtTime(isHead ? 1550 : 820, now);
-    growlFilter.frequency.exponentialRampToValueAtTime(isHead ? 720 : 360, now + .2);
-    growlFilter.Q.value = 3.2;
-    noiseSource.buffer = noiseBuffer;
-    noiseFilter.type = 'bandpass';
-    noiseFilter.frequency.setValueAtTime(isHead ? 980 : 480, now);
-    noiseFilter.frequency.exponentialRampToValueAtTime(isHead ? 520 : 230, now + .18);
-    noiseFilter.Q.value = 1.8;
-    master.gain.setValueAtTime(.0001, now);
-    master.gain.exponentialRampToValueAtTime(isHead ? .042 : .05, now + .012);
-    master.gain.exponentialRampToValueAtTime(.016, now + .085);
-    master.gain.exponentialRampToValueAtTime(.0001, now + .23);
-    growl.connect(growlFilter).connect(master);
-    noiseSource.connect(noiseFilter).connect(master);
-    master.connect(musicAudioContext.destination);
-    growl.start(now);
-    noiseSource.start(now);
-    growl.stop(now + .24);
-    noiseSource.stop(now + .24);
-  };
-
-  musicBackground.addEventListener('mousemove', (event) => {
-    const now = performance.now();
-    const stageRect = musicStage.getBoundingClientRect();
-    const pointerRatioX = Math.max(-1, Math.min(1, (event.clientX - (stageRect.left + stageRect.width / 2)) / (stageRect.width / 2)));
-    const pointerRatioY = (event.clientY - stageRect.top) / stageRect.height;
-    musicBackground.style.setProperty('--dog-tilt', `${(pointerRatioX * 15).toFixed(2)}deg`);
-    const horizontalMove = lastMusicX === null ? 0 : Math.abs(event.clientX - lastMusicX);
-    lastMusicX = event.clientX;
-    if (horizontalMove < 7 || now - lastNoteAt < 85) return;
-    lastNoteAt = now;
-
-    const scale = stageRect.width / musicStage.offsetWidth || 1;
-    const note = document.createElement('span');
-    note.className = 'music-note';
-    note.textContent = noteGlyphs[Math.floor(Math.random() * noteGlyphs.length)];
-    note.style.left = `${(event.clientX - stageRect.left) / scale}px`;
-    note.style.top = `${(event.clientY - stageRect.top) / scale}px`;
-    note.style.setProperty('--note-drift', `${Math.round((Math.random() - .5) * 54)}px`);
-    note.style.setProperty('--note-rotate', `${Math.round((Math.random() - .5) * 30)}deg`);
-    musicStage.append(note);
-    note.addEventListener('animationend', () => note.remove(), { once: true });
-    if (now - lastSoundAt >= 170) {
-      lastSoundAt = now;
-      playPuppyNote(pointerRatioY < .56);
+  document.querySelectorAll('.checker').forEach((checker) => {
+    checker.replaceChildren();
+    for (let row = 0; row < 3; row += 1) {
+      for (let column = 0; column < 9; column += 1) {
+        const cell = document.createElement('span');
+        cell.className = 'checker-cell';
+        cell.style.background = (row + column) % 2 === 0 ? '#515151' : 'transparent';
+        checker.appendChild(cell);
+      }
     }
   });
-  musicBackground.addEventListener('mouseleave', () => {
-    lastMusicX = null;
-    musicBackground.style.setProperty('--dog-tilt', '0deg');
-  });
-}
 
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    entry.target.classList.toggle('is-visible', entry.isIntersecting);
-    if (entry.target === about) document.body.classList.toggle('about-active', entry.isIntersecting);
-  });
-}, { threshold: 0.24 });
-document.querySelectorAll('.reveal-section').forEach((section) => revealObserver.observe(section));
+  const finishIntro = () => {
+    introFill.style.transform = 'scaleX(1)';
+    introPercent.textContent = '100';
+    intro.classList.add('is-complete');
+    window.setTimeout(() => {
+      intro.hidden = true;
+      document.body.classList.remove('is-loading');
+    }, reduceMotion ? 10 : 720);
+  };
 
-let ticking = false;
-const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-const renderScroll = () => {
-  ticking = false;
-  header.classList.toggle('is-scrolled', window.scrollY > 24);
-
-  if (!reduceMotion) {
+  if (reduceMotion) {
+    finishIntro();
+  } else {
+    const duration = 2800;
+    const start = performance.now();
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      introFill.style.transform = `scaleX(${eased})`;
+      introPercent.textContent = String(Math.round(eased * 100)).padStart(2, '0');
+      if (progress < 1) requestAnimationFrame(tick);
+      else window.setTimeout(finishIntro, 180);
+    };
+    requestAnimationFrame(tick);
   }
-};
 
-let photoOffset = 0;
-let dragStartX = 0;
-let dragStartOffset = 0;
-let isDragging = false;
-
-const renderPhotos = () => {
-  const cardWidth = photoCards[0]?.offsetWidth || 152.5;
-  const expandedGap = window.innerWidth <= 900 ? 5 : 0;
-  const expandedWidth = photoCards.length * (cardWidth + expandedGap) - expandedGap;
-  const maxX = Math.max(0, (expandedWidth - photoViewport.clientWidth) / 2 + 20);
-  photoOffset = clamp(photoOffset, -maxX, maxX);
-  photoTrack.style.setProperty('--photo-shift', `${-photoOffset}px`);
-};
-
-photoViewport.addEventListener('mouseenter', () => {
-  photoViewport.classList.add('is-expanded');
-  renderPhotos();
-});
-photoViewport.addEventListener('mouseleave', () => {
-  if (!isDragging) photoViewport.classList.remove('is-expanded');
-});
-
-photos.addEventListener('wheel', (event) => {
-  if (!photos.classList.contains('is-open')) return;
-  event.preventDefault();
-  photoViewport.classList.add('is-expanded');
-  photoOffset += event.deltaY + event.deltaX;
-  renderPhotos();
-  photoCards.forEach((card) => {
-    const rect = card.getBoundingClientRect();
-    const bend = clamp((rect.left + rect.width / 2 - window.innerWidth / 2) / window.innerWidth, -1, 1);
-    card.style.transform = `rotateY(${bend * -24}deg) skewY(${bend * 3.5}deg) scale(${1 - Math.abs(bend) * 0.12})`;
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
   });
-}, { passive: false });
 
-photoViewport.addEventListener('pointerdown', (event) => {
-  isDragging = true;
-  dragStartX = event.clientX;
-  dragStartOffset = photoOffset;
-  photoViewport.classList.add('is-expanded');
-  photoViewport.setPointerCapture(event.pointerId);
-});
-photoViewport.addEventListener('pointermove', (event) => {
-  if (!isDragging) return;
-  photoOffset = dragStartOffset - (event.clientX - dragStartX);
-  renderPhotos();
-});
-photoViewport.addEventListener('pointerup', (event) => {
-  isDragging = false;
-  photoViewport.releasePointerCapture(event.pointerId);
-});
+  const copyButton = document.querySelector('.copy-email');
+  const copyStatus = document.querySelector('.copy-status');
+  copyButton?.addEventListener('click', async () => {
+    const email = copyButton.dataset.email;
+    try {
+      await navigator.clipboard.writeText(email);
+    } catch {
+      const input = document.createElement('textarea');
+      input.value = email;
+      input.style.position = 'fixed';
+      input.style.opacity = '0';
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      input.remove();
+    }
+    copyStatus.classList.add('is-visible');
+    window.setTimeout(() => copyStatus.classList.remove('is-visible'), 1200);
+  });
 
-window.addEventListener('scroll', () => {
-  if (!ticking) {
-    ticking = true;
-    requestAnimationFrame(renderScroll);
+  const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 20);
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
+
+  if (window.matchMedia('(pointer: fine)').matches) {
+    const cursor = document.querySelector('.cursor-dot');
+    let targetX = -50;
+    let targetY = -50;
+    let currentX = -50;
+    let currentY = -50;
+    window.addEventListener('pointermove', (event) => {
+      targetX = event.clientX;
+      targetY = event.clientY;
+    }, { passive: true });
+    const renderCursor = () => {
+      currentX += (targetX - currentX) * 0.22;
+      currentY += (targetY - currentY) * 0.22;
+      cursor.style.left = `${currentX}px`;
+      cursor.style.top = `${currentY}px`;
+      requestAnimationFrame(renderCursor);
+    };
+    renderCursor();
+    document.querySelectorAll('a, button, .work-card, .hero-word').forEach((element) => {
+      element.addEventListener('pointerenter', () => cursor.classList.add('is-active'));
+      element.addEventListener('pointerleave', () => cursor.classList.remove('is-active'));
+    });
   }
-}, { passive: true });
-window.addEventListener('resize', () => {
-  renderScroll();
-  renderPhotos();
-  renderMusicStage();
 });
-renderScroll();
-renderMusicStage();

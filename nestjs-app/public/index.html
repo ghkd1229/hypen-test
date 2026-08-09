@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Hwang Tae Hee — Graphic designer portfolio" />
     <title>Hwang Tae Hee — Graphic Designer</title>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400&family=DM+Sans:opsz,wght@9..40,500&display=swap" />
-    <link rel="stylesheet" href="/styles.css?v=32" />
-    <script src="/interactions.js?v=32" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500&family=Roboto+Mono:wght@400&display=swap" />
+    <link rel="stylesheet" href="/styles.css?v=40" />
+    <script src="/interactions.js?v=40" defer></script>
   </head>
   <body class="is-loading">
     <div class="cursor-dot" aria-hidden="true"></div>
 
-    <div class="intro" aria-hidden="true">
-      <div class="intro-mark" role="presentation"></div>
+    <div class="intro" aria-label="페이지를 불러오는 중" role="status">
+      <div class="intro-track" aria-hidden="true">
+        <span class="intro-fill"></span>
+      </div>
+      <span class="intro-percent">00</span>
     </div>
 
     <header class="site-header">
@@ -25,13 +26,13 @@
         <div class="nav-links">
           <a href="#home">Home</a>
           <a href="#about">About</a>
-          <a href="#photos">Work</a>
+          <a href="#work">Work</a>
         </div>
         <a class="nav-logo checker" href="#home" aria-label="처음으로"></a>
         <div class="email-wrap">
           <a href="mailto:ghkkd1229@gmail.com">ghkkd1229@gmail.com</a>
           <button class="copy-email" type="button" aria-label="이메일 주소 복사" data-email="ghkkd1229@gmail.com">
-            <img src="/images/portfolio-copy.svg" alt="" />
+            <img src="/images/design-copy.svg" alt="" />
           </button>
           <span class="copy-status" role="status" aria-live="polite">Copied</span>
         </div>
@@ -39,82 +40,69 @@
     </header>
 
     <main>
-      <div class="portfolio-background" aria-hidden="true">
-        <img src="/images/figma-background-1-523.png" alt="" />
-      </div>
-      <section class="hero" id="home">
-        <span class="hero-decoration" aria-hidden="true"><img src="/images/hero-hydrangea-1-439.png" alt="" /></span>
-        <h1 aria-label="Hello, I’m Hwang Tae Hee">
-          <span class="hero-line"><span class="hero-word">Hello,</span> <span class="hero-word">I’m</span></span>
-          <a class="hero-about-link" href="#about" aria-label="About 페이지로 이동">
-            <span class="hero-line"><span class="hero-word">Hwang</span></span>
-            <span class="hero-line"><span class="hero-word">Tae Hee</span></span>
-          </a>
+      <section class="hero structural-page" id="home" aria-labelledby="hero-title">
+        <div class="grid-lines" aria-hidden="true"></div>
+        <div class="hero-bars" aria-hidden="true">
+          <i class="bar bar-a"></i><i class="bar bar-b"></i><i class="bar bar-c"></i>
+          <i class="bar bar-d"></i><i class="bar bar-e"></i><i class="bar bar-f"></i>
+        </div>
+        <h1 id="hero-title" class="hero-title" aria-label="Hello, I’m Hwang TaeHee">
+          <span class="name-block hello"><span class="hero-word">Hello,</span><span class="hero-word">I’M</span></span>
+          <span class="name-block hwang"><span class="hero-word">Hwang,</span></span>
+          <a class="name-block taehee" href="#about"><span class="hero-word">TaeHee</span></a>
         </h1>
       </section>
 
-      <section class="about reveal-section" id="about">
-        <div class="section-inner">
-          <header class="about-heading">
-            <span class="about-accent" aria-hidden="true"><img src="/images/figma-about-star.svg" alt="" /></span>
-            <div class="heading-copy">
-              <h2>About</h2>
-              <span class="draw-line"><img src="/images/design-about-line.svg" alt="" /></span>
-            </div>
-          </header>
-
-          <div class="about-content">
-            <div class="about-column left-column frame-3465183">
-              <div class="info-pill university-pill" tabindex="0">
-                <span class="university-default">Hongik University,</span>
-                <span class="university-hover">Visual Design</span>
-              </div>
-              <button class="info-pill music-jump" type="button">Music</button>
-              <button class="info-pill photo-jump" type="button">Watching baseball</button>
-            </div>
-
-            <div class="lettering-frame">
-              <div class="lettering-mask" role="img" aria-label="황태희 손글씨 레터링"></div>
-            </div>
-
-            <div class="about-column right-column frame-3465184">
-              <button class="info-pill" type="button">Branding</button>
-              <button class="info-pill" type="button">Motion Graphics</button>
-              <button class="info-pill" type="button">3D Design</button>
-            </div>
+      <section class="about structural-page" id="about" aria-labelledby="about-title">
+        <div class="about-grid" aria-hidden="true"></div>
+        <header class="section-title about-title-row">
+          <h2 id="about-title">About</h2>
+          <span>ME</span>
+        </header>
+        <div class="about-lettering" role="img" aria-label="황태희 레터링"></div>
+        <div class="skills-layout">
+          <div class="education-stack">
+            <span>Hongik University,</span>
+            <span>Visual Design</span>
           </div>
+          <div class="discipline-stack">
+            <span>Graphics Design</span>
+            <span>ㄴBranding</span>
+            <span>ㄴMotion Graphics</span>
+            <span>ㄴEditorial Design</span>
+          </div>
+          <span class="skills-tag">Skills</span>
+          <p class="skills-marquee"><span>Photoshop, Illustrator, After Effects, InDesign, Premiere Pro | C4D, Octane, Redshift | Midjourney, Chat GPT, Google Gemini, Firefly, Kling&nbsp;&nbsp;</span></p>
         </div>
       </section>
 
-      <section class="photos-modal" id="photos" aria-hidden="true">
-        <div class="photos-panel">
-          <img class="baseball-background" src="/images/figma-baseball-1-441.png" alt="야구장 관중석" />
-          <p class="baseball-caption">Baseball is my life,,,</p>
-          <button class="photos-close" type="button" aria-label="야구 사진 페이지 닫기">Close</button>
-          <div class="photo-viewport" tabindex="0" aria-label="야구 사진 모음. 마우스를 올린 뒤 휠이나 드래그로 사진을 넘겨보세요.">
-            <div class="photo-track">
-              <figure class="photo-card"><img src="/images/baseball-1.png" alt="야구 직관 사진 1" /></figure>
-              <figure class="photo-card"><img src="/images/baseball-2.png" alt="야구 직관 사진 2" /></figure>
-              <figure class="photo-card"><img src="/images/baseball-3.png" alt="야구 직관 사진 3" /></figure>
-              <figure class="photo-card"><img src="/images/baseball-4.png" alt="야구 직관 사진 4" /></figure>
-              <figure class="photo-card"><img src="/images/baseball-5.png" alt="야구 직관 사진 5" /></figure>
-              <figure class="photo-card"><img src="/images/baseball-6.png" alt="야구 직관 사진 6" /></figure>
-            </div>
-          </div>
+      <section class="work structural-page" id="work" aria-labelledby="work-title">
+        <div class="work-grid" aria-hidden="true"></div>
+        <header class="section-title work-title-row">
+          <h2 id="work-title">Work</h2>
+          <span>24—26</span>
+        </header>
+        <span class="work-category graphics">Graphics</span>
+        <span class="work-category motion">Motion</span>
+        <div class="work-column column-one">
+          <figure class="work-card"><img src="/images/figma45-work-1.png" alt="그래픽 작업 3" /></figure>
+          <figure class="work-card"><img src="/images/figma45-work-2.png" alt="그래픽 작업 2" /></figure>
+          <figure class="work-card"><img src="/images/figma45-work-3.png" alt="그래픽 작업 1" /></figure>
+        </div>
+        <div class="work-column column-two">
+          <figure class="work-card"><img src="/images/figma45-work-6.png" alt="그래픽 작업 1" /></figure>
+          <figure class="work-card"><img src="/images/figma45-work-7.png" alt="그래픽 작업 4" /></figure>
+        </div>
+        <div class="work-column column-three">
+          <figure class="work-card"><img src="/images/figma45-work-4.png" alt="모션 작업 2" /></figure>
+          <figure class="work-card"><img src="/images/figma45-work-5.png" alt="모션 작업 1" /></figure>
         </div>
       </section>
 
-      <section class="music-modal" id="music" aria-hidden="true">
-        <div class="music-panel">
-          <p class="music-caption">Music is my life,,,</p>
-          <button class="music-close" type="button" aria-label="Music 페이지 닫기">Close</button>
-          <div class="music-stage">
-            <img class="music-background" src="/images/music-background.png" alt="" />
-            <figure class="music-card frame-4"><img src="/images/music-card-1.png" alt="음악 플레이리스트 이미지 1" /></figure>
-            <figure class="music-card frame-10"><img src="/images/music-card-2.png" alt="음악 플레이리스트 이미지 2" /></figure>
-          </div>
-        </div>
-      </section>
+      <footer class="site-footer structural-page">
+        <div class="footer-grid" aria-hidden="true"></div>
+        <p>© 2026 HwangTaeHee. All rights reserved.</p>
+      </footer>
     </main>
   </body>
 </html>
