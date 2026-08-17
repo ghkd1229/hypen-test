@@ -191,13 +191,14 @@ button { padding: 0; border: 0; background: none; }
   height: 6.944444vw;
   color: white;
   background: transparent;
-  font-size: 7.346426vw;
+  font-size: 6.979104vw;
   line-height: 5.791944vw;
   letter-spacing: -.02em;
   white-space: nowrap;
+  transform: translateY(-0.833333vw);
 }
 .name-block.hello { left: 12.638889%; top: 36.523438%; gap: 1.597222vw; }
-.name-block.hello .hero-word:first-child { width: 20.972222vw; justify-content: center; font-size: 7.506944vw; }
+.name-block.hello .hero-word:first-child { width: 20.972222vw; justify-content: center; font-size: 7.131597vw; }
 .name-block.hwang { left: 46.597222%; top: 48.535156%; z-index: 4; }
 .name-block.hwang .hero-word { width: 26.944444vw; }
 .name-block.taehee { left: auto; right: 12.708333%; top: 58.300781%; z-index: 3; }
