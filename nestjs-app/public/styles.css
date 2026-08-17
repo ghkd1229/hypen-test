@@ -27,12 +27,12 @@ button { padding: 0; border: 0; background: none; }
   width: 21px;
   height: 21px;
   pointer-events: none;
-  border-radius: 45% 55% 48% 52% / 56% 44% 56% 44%;
+  border-radius: 0;
   background: rgba(144, 183, 249, .5);
-  transform: translate3d(-50%, -50%, 0) rotate(45deg);
+  transform: translate3d(-50%, -50%, 0);
   transition: width 180ms ease, height 180ms ease, border-radius 180ms ease;
 }
-.cursor-dot.is-active { width: 34px; height: 34px; border-radius: 50%; }
+.cursor-dot.is-active { width: 34px; height: 34px; border-radius: 0; }
 
 .intro {
   position: fixed;
@@ -78,6 +78,7 @@ button { padding: 0; border: 0; background: none; }
   height: 5.277778vw;
   padding: 2.361111vw 4.097222vw 0;
   color: #000;
+  background: white;
   transition: background 220ms ease, backdrop-filter 220ms ease;
 }
 .site-header::after {
@@ -177,8 +178,8 @@ button { padding: 0; border: 0; background: none; }
   height: 6.944444vw;
   color: white;
   background: transparent;
-  font-size: 7.815347vw;
-  line-height: 5.791944vw;
+  font-size: 6.944444vw;
+  line-height: 5.208333vw;
   letter-spacing: -.02em;
   white-space: nowrap;
 }
