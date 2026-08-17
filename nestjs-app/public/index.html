@@ -7,9 +7,9 @@
     <title>Hwang Tae Hee — Graphic Designer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500&family=Roboto+Mono:wght@400&display=swap" />
-    <link rel="stylesheet" href="/styles.css?v=41" />
-    <script src="/interactions.js?v=40" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400&family=Roboto+Mono:wght@400&display=swap" />
+    <link rel="stylesheet" href="/styles.css?v=57" />
+    <script src="/interactions.js?v=57" defer></script>
   </head>
   <body class="is-loading">
     <div class="cursor-dot" aria-hidden="true"></div>
@@ -25,7 +25,7 @@
       <nav class="nav-shell" aria-label="주요 메뉴">
         <div class="nav-links">
           <a href="#home">Home</a>
-          <a href="#about">About</a>
+          <a href="#work">About</a>
           <a href="#work">Work</a>
         </div>
         <a class="nav-logo checker" href="#home" aria-label="처음으로"></a>
@@ -39,63 +39,44 @@
       </nav>
     </header>
 
-    <main>
+    <main class="site-stage">
       <section class="hero structural-page" id="home" aria-labelledby="hero-title">
-        <div class="grid-lines" aria-hidden="true"></div>
+        <div class="design-grid hero-grid" aria-hidden="true"></div>
         <div class="hero-bars" aria-hidden="true">
-          <i class="bar bar-a"></i><i class="bar bar-b"></i><i class="bar bar-c"></i>
-          <i class="bar bar-d"></i><i class="bar bar-e"></i><i class="bar bar-f"></i>
+          <span class="bar-a"></span><span class="bar-b"></span><span class="bar-c"></span><span class="bar-d"></span>
+          <span class="bar-e"></span><span class="bar-f"></span><span class="bar-g"></span><span class="bar-h"></span>
         </div>
         <h1 id="hero-title" class="hero-title" aria-label="Hello, I’m Hwang TaeHee">
           <span class="name-block hello"><span class="hero-word">Hello,</span><span class="hero-word">I’M</span></span>
           <span class="name-block hwang"><span class="hero-word">Hwang,</span></span>
-          <a class="name-block taehee" href="#about"><span class="hero-word">TaeHee</span></a>
+          <a class="name-block taehee" href="#work"><span class="hero-word">TaeHee</span></a>
         </h1>
       </section>
 
-      <section class="about structural-page" id="about" aria-labelledby="about-title">
-        <div class="about-grid" aria-hidden="true"></div>
-        <header class="section-title about-title-row">
-          <h2 id="about-title">About</h2>
-          <span>ME</span>
-        </header>
-        <div class="about-lettering" role="img" aria-label="황태희 레터링"></div>
-        <div class="skills-layout">
-          <div class="education-stack">
-            <span>Hongik University,</span>
-            <span>Visual Design</span>
-          </div>
-          <div class="discipline-stack">
-            <span>Graphics Design</span>
-            <span>ㄴBranding</span>
-            <span>ㄴMotion Graphics</span>
-            <span>ㄴEditorial Design</span>
-          </div>
-          <span class="skills-tag">Skills</span>
-          <p class="skills-marquee"><span>Photoshop, Illustrator, After Effects, InDesign, Premiere Pro | C4D, Octane, Redshift | Midjourney, Chat GPT, Google Gemini, Firefly, Kling&nbsp;&nbsp;</span></p>
-        </div>
-      </section>
-
       <section class="work structural-page" id="work" aria-labelledby="work-title">
-        <div class="work-grid" aria-hidden="true"></div>
-        <header class="section-title work-title-row">
+        <div class="design-grid work-grid" aria-hidden="true"></div>
+        <header class="work-heading">
           <h2 id="work-title">Work</h2>
           <span>24—26</span>
         </header>
         <span class="work-category graphics">Graphics</span>
         <span class="work-category motion">Motion</span>
-        <div class="work-column column-one">
-          <figure class="work-card"><img src="/images/figma45-work-1.png" alt="그래픽 작업 3" /></figure>
-          <figure class="work-card"><img src="/images/figma45-work-2.png" alt="그래픽 작업 2" /></figure>
-          <figure class="work-card"><img src="/images/figma45-work-3.png" alt="그래픽 작업 1" /></figure>
-        </div>
-        <div class="work-column column-two">
-          <figure class="work-card"><img src="/images/figma45-work-6.png" alt="그래픽 작업 1" /></figure>
-          <figure class="work-card"><img src="/images/figma45-work-7.png" alt="그래픽 작업 4" /></figure>
-        </div>
-        <div class="work-column column-three">
-          <figure class="work-card"><img src="/images/figma45-work-4.png" alt="모션 작업 2" /></figure>
-          <figure class="work-card"><img src="/images/figma45-work-5.png" alt="모션 작업 1" /></figure>
+        <div class="work-columns">
+          <div class="work-column">
+            <figure class="work-card"><img src="/images/figma57-work-1.png" alt="그래픽 작업 1" /></figure>
+            <figure class="work-card"><img src="/images/figma57-work-2.png" alt="그래픽 작업 2" /></figure>
+            <figure class="work-card"><img src="/images/figma57-work-3.png" alt="그래픽 작업 3" /></figure>
+          </div>
+          <div class="work-column">
+            <figure class="work-card"><img src="/images/figma57-work-4.png" alt="그래픽 작업 4" /></figure>
+            <figure class="work-card"><img src="/images/figma57-work-5.png" alt="그래픽 작업 5" /></figure>
+            <figure class="work-card"><img src="/images/figma57-work-5.png" alt="그래픽 작업 5" /></figure>
+          </div>
+          <div class="work-column">
+            <figure class="work-card"><img src="/images/figma57-work-6.png" alt="모션 작업 1" /></figure>
+            <figure class="work-card"><img src="/images/figma57-work-7.png" alt="모션 작업 2" /></figure>
+            <figure class="work-card"><img src="/images/figma57-work-8.png" alt="모션 작업 3" /></figure>
+          </div>
         </div>
       </section>
 
