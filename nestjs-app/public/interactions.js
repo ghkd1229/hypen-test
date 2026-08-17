@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const introFill = document.querySelector('.intro-fill');
   const introPercent = document.querySelector('.intro-percent');
   const header = document.querySelector('.site-header');
+  const heroWords = [...document.querySelectorAll('.hero-word')];
+  const heroTexts = heroWords.map((word) => word.textContent.trim());
+
+  heroWords.forEach((word) => {
+    word.textContent = '';
+  });
 
   window.history.scrollRestoration = 'manual';
   window.scrollTo(0, 0);
@@ -20,6 +26,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  let typingStarted = false;
+  const startHeroTyping = async () => {
+    if (typingStarted) return;
+    typingStarted = true;
+    if (reduceMotion) {
+      heroWords.forEach((word, index) => {
+        word.textContent = heroTexts[index];
+      });
+      return;
+    }
+    for (let wordIndex = 0; wordIndex < heroWords.length; wordIndex += 1) {
+      const word = heroWords[wordIndex];
+      const text = heroTexts[wordIndex];
+      word.classList.add('is-typing');
+      for (const character of text) {
+        word.textContent += character;
+        await new Promise((resolve) => window.setTimeout(resolve, 86));
+      }
+      await new Promise((resolve) => window.setTimeout(resolve, 150));
+      word.classList.remove('is-typing');
+    }
+  };
+
   const finishIntro = () => {
     introFill.style.transform = 'scaleX(1)';
     introPercent.textContent = '100';
@@ -27,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.setTimeout(() => {
       intro.hidden = true;
       document.body.classList.remove('is-loading');
+      startHeroTyping();
     }, reduceMotion ? 10 : 720);
   };
 
@@ -79,6 +109,14 @@ document.addEventListener('DOMContentLoaded', () => {
   updateHeader();
   window.addEventListener('scroll', updateHeader, { passive: true });
 
+  const workSection = document.querySelector('.work');
+  if (workSection) {
+    const workObserver = new IntersectionObserver(([entry]) => {
+      workSection.classList.toggle('is-visible', entry.isIntersecting);
+    }, { threshold: 0.25 });
+    workObserver.observe(workSection);
+  }
+
   if (window.matchMedia('(pointer: fine)').matches) {
     const cursor = document.querySelector('.cursor-dot');
     let targetX = -50;
@@ -97,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(renderCursor);
     };
     renderCursor();
-    document.querySelectorAll('a, button, .work-card, .hero-word').forEach((element) => {
+    document.querySelectorAll('a, button, .work-card').forEach((element) => {
       element.addEventListener('pointerenter', () => cursor.classList.add('is-active'));
       element.addEventListener('pointerleave', () => cursor.classList.remove('is-active'));
     });
