@@ -155,30 +155,23 @@ button { padding: 0; border: 0; background: none; }
 }
 .hero-grid { position: absolute; inset: 0; pointer-events: none; }
 .hero-grid i { position: absolute; display: block; margin: 0; background: var(--ink); }
-.hero-grid .hline { left: 0; width: 100%; height: 1px; transform: translateY(-1.597222vw); }
+.hero-grid .hline { left: 0; width: 100%; height: 1px; }
 .hline-a { top: 36.523438%; }
 .hline-b { top: 46.289063%; }
 .hline-c { top: 48.535156%; }
-.hline-d { display: none !important; }
+.hline-d { top: 58.300781%; }
 .hline-e { top: 68.066406%; }
 .hero-grid .vline { width: 1px; }
-.vline-a { left: 4.097222%; top: 56.054688%; bottom: 0; }
-.vline-b { left: 12.638889%; top: 7.324219%; height: 48.730469%; }
+.vline-a { left: 4.097222%; top: 58.300781%; bottom: 0; }
+.vline-b { left: 12.638889%; top: 7.324219%; height: 50.976563%; }
 .vline-c { left: 33.611111%; top: 7.324219%; bottom: 0; }
 .vline-d { left: 35.208333%; top: 7.324219%; bottom: 0; }
 .vline-e { left: 64.722222%; top: 7.324219%; bottom: 0; }
 .vline-f { left: 66.319444%; top: 7.324219%; bottom: 0; }
-.vline-g { left: 87.291667%; top: 7.324219%; height: 54.980469%; }
-.vline-h { left: 95.833333%; top: 56.054688%; bottom: 0; }
+.vline-g { left: 87.291667%; top: 7.324219%; height: 57.226563%; }
+.vline-h { left: 95.833333%; top: 58.300781%; bottom: 0; }
 .hero-bars, .hero-title { position: absolute; inset: 0; }
 .hero-bars span { position: absolute; display: block; background: var(--ink); }
-.hero-bars .bar-a,
-.hero-bars .bar-b,
-.hero-bars .bar-c,
-.hero-bars .bar-e,
-.hero-bars .bar-f,
-.hero-bars .bar-g,
-.hero-bars .bar-h { transform: translateY(-1.597222vw); }
 .hero-bars .bar-a { left: 0; top: 46.289063%; width: 12.708333%; height: 2.246094%; }
 .hero-bars .bar-b { right: 0; top: 46.289063%; width: 12.708333%; height: 2.246094%; }
 .hero-bars .bar-c { left: 33.611111%; top: 46.289063%; width: 1.666667%; height: 2.34375%; }
@@ -202,13 +195,12 @@ button { padding: 0; border: 0; background: none; }
   line-height: 5.791944vw;
   letter-spacing: -.02em;
   white-space: nowrap;
-  transform: translateY(-1.597222vw);
 }
 .name-block.hello { left: 12.638889%; top: 36.523438%; gap: 1.597222vw; }
 .name-block.hello .hero-word:first-child { width: 20.972222vw; justify-content: center; font-size: 7.986111vw; }
 .name-block.hwang { left: 46.597222%; top: 48.535156%; z-index: 4; }
 .name-block.hwang .hero-word { width: 26.944444vw; }
-.name-block.taehee { left: auto; right: 11.111111%; top: 58.300781%; z-index: 3; }
+.name-block.taehee { left: auto; right: 12.708333%; top: 58.300781%; z-index: 3; }
 .name-block.taehee .hero-word { width: 27.777778vw; justify-content: center; }
 .hero-word {
   display: flex;
