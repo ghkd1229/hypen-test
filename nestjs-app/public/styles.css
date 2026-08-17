@@ -127,7 +127,7 @@ button { padding: 0; border: 0; background: none; }
 .site-stage { position: relative; width: 100%; background: white; }
 .structural-page { position: relative; width: 100%; overflow: hidden; background: white; }
 .hero { aspect-ratio: 1440 / 1024; }
-.work { aspect-ratio: 1440 / 1024; }
+.work { aspect-ratio: 1440 / 1024; scroll-margin-top: 1.666667vw; }
 .site-footer { aspect-ratio: 1440 / 512; }
 
 .design-grid {
@@ -191,13 +191,13 @@ button { padding: 0; border: 0; background: none; }
   height: 6.944444vw;
   color: white;
   background: transparent;
-  font-size: 7.815347vw;
+  font-size: 7.346426vw;
   line-height: 5.791944vw;
   letter-spacing: -.02em;
   white-space: nowrap;
 }
 .name-block.hello { left: 12.638889%; top: 36.523438%; gap: 1.597222vw; }
-.name-block.hello .hero-word:first-child { width: 20.972222vw; justify-content: center; font-size: 7.986111vw; }
+.name-block.hello .hero-word:first-child { width: 20.972222vw; justify-content: center; font-size: 7.506944vw; }
 .name-block.hwang { left: 46.597222%; top: 48.535156%; z-index: 4; }
 .name-block.hwang .hero-word { width: 26.944444vw; }
 .name-block.taehee { left: auto; right: 12.708333%; top: 58.300781%; z-index: 3; }
@@ -205,6 +205,7 @@ button { padding: 0; border: 0; background: none; }
 .hero-word {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 100%;
   padding: 0 0.694444vw;
   background: var(--ink);
