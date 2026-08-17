@@ -115,6 +115,32 @@ document.addEventListener('DOMContentLoaded', () => {
       workSection.classList.toggle('is-visible', entry.isIntersecting);
     }, { threshold: 0.25 });
     workObserver.observe(workSection);
+
+    const workColumns = [...workSection.querySelectorAll('.work-column')];
+    let folderFrame = 0;
+    const updateFolderSpread = () => {
+      folderFrame = 0;
+      if (reduceMotion) {
+        workColumns.forEach((column) => column.style.setProperty('--folder-overlap', '-24.652778vw'));
+        return;
+      }
+      const rect = workSection.getBoundingClientRect();
+      const travel = window.innerHeight * 0.82;
+      const rawProgress = Math.min(Math.max((travel - rect.top) / travel, 0), 1);
+      workColumns.forEach((column, index) => {
+        const staggered = Math.min(Math.max((rawProgress - index * 0.055) / 0.89, 0), 1);
+        const eased = 1 - Math.pow(1 - staggered, 3);
+        const overlap = -31.597222 + (6.944444 * eased);
+        column.style.setProperty('--folder-overlap', `${overlap}vw`);
+      });
+    };
+    const requestFolderUpdate = () => {
+      if (folderFrame) return;
+      folderFrame = window.requestAnimationFrame(updateFolderSpread);
+    };
+    updateFolderSpread();
+    window.addEventListener('scroll', requestFolderUpdate, { passive: true });
+    window.addEventListener('resize', requestFolderUpdate, { passive: true });
   }
 
   if (window.matchMedia('(pointer: fine)').matches) {
