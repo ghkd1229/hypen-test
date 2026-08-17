@@ -188,9 +188,11 @@ button { padding: 0; border: 0; background: none; }
   white-space: nowrap;
 }
 .name-block.hello { left: 12.638889%; top: 36.523438%; gap: 1.597222vw; }
-.name-block.hello .hero-word:first-child { font-size: 7.986111vw; }
-.name-block.hwang { left: 46.597222%; top: 48.535156%; }
-.name-block.taehee { right: 12.708333%; top: 58.300781%; }
+.name-block.hello .hero-word:first-child { width: 20.972222vw; font-size: 7.986111vw; }
+.name-block.hwang { left: 46.597222%; top: 48.535156%; z-index: 4; }
+.name-block.hwang .hero-word { width: 26.944444vw; }
+.name-block.taehee { left: 59.513889%; right: auto; top: 58.300781%; z-index: 3; }
+.name-block.taehee .hero-word { width: 27.777778vw; justify-content: flex-start; }
 .hero-word {
   display: flex;
   align-items: center;
@@ -253,7 +255,7 @@ button { padding: 0; border: 0; background: none; }
   letter-spacing: -.02em;
 }
 .work-category.graphics { left: 35.208333vw; }
-.work-category.motion { left: 50.625000vw; }
+.work-category.motion { left: auto; right: 35.208333vw; }
 .work-columns {
   position: absolute;
   z-index: 3;
@@ -263,7 +265,7 @@ button { padding: 0; border: 0; background: none; }
   gap: 1.527778vw;
 }
 .work-column {
-  --folder-overlap: -31.597222vw;
+  --folder-overlap: -34.027778vw;
   position: relative;
   display: flex;
   flex-direction: column;

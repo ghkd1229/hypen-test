@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
       workColumns.forEach((column, index) => {
         const staggered = Math.min(Math.max((rawProgress - index * 0.055) / 0.89, 0), 1);
         const eased = 1 - Math.pow(1 - staggered, 3);
-        const overlap = -31.597222 + (6.944444 * eased);
+        const overlap = -34.027778 + (9.375 * eased);
         column.style.setProperty('--folder-overlap', `${overlap}vw`);
       });
     };
