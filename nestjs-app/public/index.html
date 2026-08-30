@@ -8,88 +8,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300&family=Roboto+Mono:wght@400&display=swap" />
-    <link rel="stylesheet" href="/styles.css?v=70" />
-    <script src="/interactions.js?v=70" defer></script>
+    <link rel="stylesheet" href="/styles.css?v=71" />
+    <script src="/interactions.js?v=71" defer></script>
   </head>
   <body class="is-loading">
     <div class="cursor-dot" aria-hidden="true"></div>
 
     <div class="intro" aria-label="페이지를 불러오는 중" role="status">
-      <img class="intro-art" src="/images/landing-70-full.png" alt="" />
       <div class="intro-track" aria-hidden="true">
         <span class="intro-fill"></span>
       </div>
       <span class="intro-percent">00</span>
     </div>
 
-    <header class="site-header">
-      <nav class="nav-shell" aria-label="주요 메뉴">
-        <div class="nav-links">
-          <a href="#home">Home</a>
-          <a href="#work">About</a>
-          <a href="#work">Work</a>
-        </div>
-        <a class="nav-logo checker" href="#home" aria-label="처음으로"></a>
-        <div class="email-wrap">
-          <a href="mailto:ghkkd1229@gmail.com">ghkkd1229@gmail.com</a>
-          <button class="copy-email" type="button" aria-label="이메일 주소 복사" data-email="ghkkd1229@gmail.com">
-            <img src="/images/design-copy.svg" alt="" />
-          </button>
-          <span class="copy-status" role="status" aria-live="polite">Copied</span>
-        </div>
-      </nav>
-    </header>
-
     <main class="site-stage">
-      <section class="hero structural-page" id="home" aria-labelledby="hero-title">
-        <div class="hero-grid" aria-hidden="true">
-          <i class="hline hline-a"></i><i class="hline hline-b"></i><i class="hline hline-c"></i>
-          <i class="hline hline-d"></i><i class="hline hline-e"></i>
-          <i class="vline vline-a"></i><i class="vline vline-b"></i><i class="vline vline-c"></i><i class="vline vline-d"></i>
-          <i class="vline vline-e"></i><i class="vline vline-f"></i><i class="vline vline-g"></i><i class="vline vline-h"></i>
-        </div>
-        <div class="hero-bars" aria-hidden="true">
-          <span class="bar-a"></span><span class="bar-b"></span><span class="bar-c"></span><span class="bar-d"></span>
-          <span class="bar-e"></span><span class="bar-f"></span><span class="bar-g"></span><span class="bar-h"></span>
-        </div>
-        <h1 id="hero-title" class="hero-title" aria-label="Hello, I’m Hwang TaeHee">
-          <span class="name-block hello"><span class="hero-word">Hello,</span><span class="hero-word">I’M</span></span>
-          <span class="name-block hwang"><span class="hero-word">Hwang,</span></span>
-          <span class="name-block taehee"><span class="hero-word">TaeHee</span></span>
-        </h1>
+      <section class="hero hero-70" id="home" aria-labelledby="hero-title">
+        <h1 id="hero-title" class="sr-only">Hwang Tae Hee Portfolio</h1>
+        <img src="/images/landing-70-full.png" alt="손과 실로 구성된 Hwang Tae Hee 포트폴리오 히어로 디자인" />
       </section>
-
-      <section class="work structural-page" id="work" aria-labelledby="work-title">
-        <div class="design-grid work-grid" aria-hidden="true"></div>
-        <header class="work-heading">
-          <h2 id="work-title">Work</h2>
-          <span>24—26</span>
-        </header>
-        <span class="work-category graphics">Graphics</span>
-        <span class="work-category motion">Motion</span>
-        <div class="work-columns">
-          <div class="work-column">
-            <figure class="work-card"><img src="/images/figma57-work-1.png" alt="그래픽 작업 1" /></figure>
-            <figure class="work-card"><img src="/images/figma57-work-2.png" alt="그래픽 작업 2" /></figure>
-            <figure class="work-card"><img src="/images/figma57-work-3.png" alt="그래픽 작업 3" /></figure>
-          </div>
-          <div class="work-column">
-            <figure class="work-card"><img src="/images/figma57-work-4.png" alt="그래픽 작업 4" /></figure>
-            <figure class="work-card"><img src="/images/figma57-work-5.png" alt="그래픽 작업 5" /></figure>
-            <figure class="work-card"><img src="/images/figma57-work-5.png" alt="그래픽 작업 5" /></figure>
-          </div>
-          <div class="work-column">
-            <figure class="work-card"><img src="/images/figma57-work-6.png" alt="모션 작업 1" /></figure>
-            <figure class="work-card"><img src="/images/figma57-work-7.png" alt="모션 작업 2" /></figure>
-            <figure class="work-card"><img src="/images/figma57-work-8.png" alt="모션 작업 3" /></figure>
-          </div>
-        </div>
-      </section>
-
-      <footer class="site-footer structural-page">
-        <div class="footer-grid" aria-hidden="true"></div>
-        <p>© 2026 HwangTaeHee. All rights reserved.</p>
-      </footer>
     </main>
   </body>
 </html>

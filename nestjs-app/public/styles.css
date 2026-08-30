@@ -38,41 +38,40 @@ button { padding: 0; border: 0; background: none; }
   position: fixed;
   inset: 0;
   z-index: 5000;
-  overflow: hidden;
-  background: #f8f8ff;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
   transition: transform 700ms cubic-bezier(.76, 0, .24, 1), filter 600ms ease;
 }
-.intro-art {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center top;
-  clip-path: inset(0 100% 0 0);
-  will-change: clip-path;
-}
-.intro-track {
+.intro::before, .intro::after {
+  content: "";
   position: absolute;
-  width: 1px;
+  left: 0;
+  width: 100%;
   height: 1px;
-  overflow: hidden;
-  opacity: 0;
+  background: #bbdbf4;
+}
+.intro::before { top: calc(50% - 12px); }
+.intro::after { top: calc(50% + 11px); }
+.intro-track {
+  width: 100%;
+  height: 23px;
 }
 .intro-fill {
   display: block;
   width: 100%;
   height: 100%;
-  background: var(--ink);
+  background: #bbdbf4;
   transform: scaleX(0);
   transform-origin: left center;
 }
 .intro-percent {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
+  right: 4.1vw;
+  bottom: 34px;
+  color: #6f92ad;
+  font-family: "Roboto Mono", monospace;
+  font-size: 13px;
 }
 .intro.is-complete { transform: translateY(-100%); filter: blur(7px); }
 
@@ -132,6 +131,30 @@ button { padding: 0; border: 0; background: none; }
 .site-stage { position: relative; width: 100%; background: white; }
 .structural-page { position: relative; width: 100%; overflow: hidden; background: white; }
 .hero { aspect-ratio: 1440 / 1024; }
+.hero-70 {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #f8f8ff;
+}
+.hero-70 > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center top;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 .work { aspect-ratio: 1440 / 1024; scroll-margin-top: 1.666667vw; }
 .site-footer { aspect-ratio: 1440 / 512; }
 
