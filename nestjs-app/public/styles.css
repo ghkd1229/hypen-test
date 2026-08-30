@@ -262,10 +262,10 @@ button { padding: 0; border: 0; background: none; }
 .hero-70-menu nav span:hover,
 .hero-70-menu nav a:hover { background: rgba(187, 219, 244, .5); }
 .hero-spline-frame {
-  position: sticky;
+  position: relative;
   z-index: 3;
   top: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   margin: 0 auto;
   overflow: hidden;
@@ -280,7 +280,8 @@ button { padding: 0; border: 0; background: none; }
   position: relative;
   z-index: 3;
   width: 100%;
-  min-height: 200vh;
+  height: 100vh;
+  min-height: 100vh;
   margin-top: 0;
   background: #f8f8ff;
 }
