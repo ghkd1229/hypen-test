@@ -174,18 +174,32 @@ button { padding: 0; border: 0; background: none; }
   height: 2.013889vw;
   border-radius: 1.597222vw;
   color: #000;
-  background: #f1f2f7;
+  background: rgba(187, 219, 244, .5);
   font-size: 1.458333vw;
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.02em;
+  transition: background 180ms ease, transform 180ms ease;
 }
+.hero-70-menu-title:hover,
+.hero-70-menu-title[aria-expanded="true"] { background: rgba(187, 219, 244, .72); }
 .hero-70-menu {
   display: flex;
   align-items: flex-start;
   width: 9.513889vw;
   margin-top: 1.041667vw;
   margin-left: auto;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-0.694444vw);
+  transition: opacity 220ms ease, transform 260ms cubic-bezier(.22, 1, .36, 1), visibility 220ms;
+}
+.hero-70-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 .hero-70-menu > img {
   display: block;
@@ -214,10 +228,10 @@ button { padding: 0; border: 0; background: none; }
   border-radius: 0.694444vw;
   white-space: nowrap;
 }
-.hero-70-menu nav .is-active { background: #f1f2f7; }
-.hero-70-menu nav span:not(.is-active),
-.hero-70-menu nav a { padding-block: 0; }
-.hero-70-menu nav a:hover { background: rgba(241, 242, 247, .72); }
+.hero-70-menu nav span,
+.hero-70-menu nav a { padding-block: 0; transition: background 160ms ease; }
+.hero-70-menu nav span:hover,
+.hero-70-menu nav a:hover { background: rgba(187, 219, 244, .5); }
 .sr-only {
   position: absolute;
   width: 1px;

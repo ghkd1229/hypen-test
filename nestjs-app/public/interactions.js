@@ -85,6 +85,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  const heroMenuButton = document.querySelector('.hero-70-menu-title');
+  const heroMenuPanel = document.querySelector('.hero-70-menu');
+  const setHeroMenuOpen = (isOpen) => {
+    heroMenuButton?.setAttribute('aria-expanded', String(isOpen));
+    heroMenuPanel?.setAttribute('aria-hidden', String(!isOpen));
+    heroMenuPanel?.classList.toggle('is-open', isOpen);
+  };
+  heroMenuButton?.addEventListener('click', () => {
+    setHeroMenuOpen(heroMenuButton.getAttribute('aria-expanded') !== 'true');
+  });
+  document.addEventListener('click', (event) => {
+    if (!heroMenuButton || !heroMenuPanel || heroMenuButton.contains(event.target) || heroMenuPanel.contains(event.target)) return;
+    setHeroMenuOpen(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    setHeroMenuOpen(false);
+    heroMenuButton?.focus();
+  });
+
   const copyButton = document.querySelector('.copy-email');
   const copyStatus = document.querySelector('.copy-status');
   copyButton?.addEventListener('click', async () => {
