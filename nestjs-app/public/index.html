@@ -8,16 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;500;600&family=Roboto+Mono:wght@400&display=swap" />
-    <link rel="stylesheet" href="/styles.css?v=82" />
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
-          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"
-        }
-      }
-    </script>
-    <script type="module" src="/hero-3d.js?v=2"></script>
+    <link rel="stylesheet" href="/styles.css?v=83" />
+    <script type="module" src="https://cdn.spline.design/@splinetool/viewer@2.0.15/build/spline-viewer.js"></script>
     <script src="/interactions.js?v=75" defer></script>
   </head>
   <body class="is-loading">
@@ -34,7 +26,9 @@
       <section class="hero hero-70" id="home" aria-labelledby="hero-title">
         <h1 id="hero-title" class="sr-only">Hwang Tae Hee Portfolio</h1>
         <img class="hero-70-photo" src="/images/hero-70-photo.png" alt="손과 실로 구성된 Hwang Tae Hee 포트폴리오 히어로 디자인" />
-        <div class="hero-70-model" aria-label="천천히 회전하는 3D 그래픽"></div>
+        <div class="hero-70-spline" aria-label="마우스에 반응하는 Spline 3D 장면">
+          <spline-viewer url="https://prod.spline.design/XVAZc2MLlIN1afBk/scene.splinecode"></spline-viewer>
+        </div>
         <div class="hero-70-ui">
           <div class="hero-70-top">
             <img class="hero-70-logo" src="/images/hero-70-logo.svg" alt="Hwang Tae Hee 로고" />
