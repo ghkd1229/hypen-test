@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const heroMenuButton = document.querySelector('.hero-70-menu-title');
   const heroMenuPanel = document.querySelector('.hero-70-menu');
+  const heroMenuRail = document.querySelector('.hero-70-rail');
   const setHeroMenuOpen = (isOpen) => {
     heroMenuButton?.setAttribute('aria-expanded', String(isOpen));
     heroMenuPanel?.setAttribute('aria-hidden', String(!isOpen));
@@ -94,6 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   heroMenuButton?.addEventListener('click', () => {
     setHeroMenuOpen(heroMenuButton.getAttribute('aria-expanded') !== 'true');
+  });
+  heroMenuPanel?.addEventListener('pointermove', (event) => {
+    if (!heroMenuRail) return;
+    const panelRect = heroMenuPanel.getBoundingClientRect();
+    const railRect = heroMenuRail.getBoundingClientRect();
+    const pointerY = event.clientY - panelRect.top;
+    const minY = railRect.height * (11.5 / 111);
+    const maxY = railRect.height * (99.5 / 111);
+    const nextY = Math.min(Math.max(pointerY, minY), maxY);
+    heroMenuRail.style.setProperty('--rail-dot-y', `${nextY}px`);
   });
   document.addEventListener('click', (event) => {
     if (!heroMenuButton || !heroMenuPanel || heroMenuButton.contains(event.target) || heroMenuPanel.contains(event.target)) return;
