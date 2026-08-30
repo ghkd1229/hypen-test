@@ -271,11 +271,10 @@ button { padding: 0; border: 0; background: none; }
   overflow: hidden;
   background: #d9d9d9;
 }
-.hero-spline-frame iframe {
+.hero-spline-frame spline-viewer {
   display: block;
   width: 100%;
   height: 100%;
-  border: 0;
 }
 .spline-scroll-sequence {
   position: relative;
