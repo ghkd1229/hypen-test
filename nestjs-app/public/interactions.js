@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const intro = document.querySelector('.intro');
+  const introArt = document.querySelector('.intro-art');
   const introFill = document.querySelector('.intro-fill');
   const introPercent = document.querySelector('.intro-percent');
   const header = document.querySelector('.site-header');
@@ -51,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const finishIntro = () => {
     introFill.style.transform = 'scaleX(1)';
+    introArt.style.clipPath = 'inset(0 0 0 0)';
     introPercent.textContent = '100';
     intro.classList.add('is-complete');
     window.setTimeout(() => {
@@ -69,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       introFill.style.transform = `scaleX(${eased})`;
+      introArt.style.clipPath = `inset(0 ${(1 - eased) * 100}% 0 0)`;
       introPercent.textContent = String(Math.round(eased * 100)).padStart(2, '0');
       if (progress < 1) requestAnimationFrame(tick);
       else window.setTimeout(finishIntro, 180);

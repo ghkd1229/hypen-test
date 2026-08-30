@@ -38,22 +38,26 @@ button { padding: 0; border: 0; background: none; }
   position: fixed;
   inset: 0;
   z-index: 5000;
-  display: grid;
-  place-items: center;
-  background: var(--paper);
+  overflow: hidden;
+  background: #f8f8ff;
   transition: transform 700ms cubic-bezier(.76, 0, .24, 1), filter 600ms ease;
 }
-.intro::before, .intro::after {
-  content: "";
-  position: absolute;
-  left: 0;
+.intro-art {
+  display: block;
   width: 100%;
-  height: 1px;
-  background: var(--ink);
+  height: 100%;
+  object-fit: contain;
+  object-position: center top;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
 }
-.intro::before { top: calc(50% - 12px); }
-.intro::after { top: calc(50% + 11px); }
-.intro-track { width: 100%; height: 23px; }
+.intro-track {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
 .intro-fill {
   display: block;
   width: 100%;
@@ -64,10 +68,11 @@ button { padding: 0; border: 0; background: none; }
 }
 .intro-percent {
   position: absolute;
-  right: 4.1vw;
-  bottom: 34px;
-  font-family: "Roboto Mono", monospace;
-  font-size: 13px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 .intro.is-complete { transform: translateY(-100%); filter: blur(7px); }
 
