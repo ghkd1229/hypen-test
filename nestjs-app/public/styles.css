@@ -148,17 +148,20 @@ button { padding: 0; border: 0; background: none; }
   object-position: center;
   pointer-events: none;
 }
-.hero-70-spline {
-  position: absolute;
-  z-index: 1;
-  left: 12.5%;
-  top: 10.15625%;
-  width: 75.050208%;
-  height: 56.933594%;
-  overflow: visible;
-  pointer-events: auto;
+.spline-scroll-page {
+  position: relative;
+  width: 100%;
+  min-height: 200vh;
+  background: #f8f8ff;
 }
-.hero-70-spline spline-viewer {
+.spline-scroll-stage {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: visible;
+}
+.spline-scroll-stage spline-viewer {
   display: block;
   width: 100%;
   height: 100%;
