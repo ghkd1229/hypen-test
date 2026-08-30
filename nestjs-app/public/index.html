@@ -8,8 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;500;600&family=Roboto+Mono:wght@400&display=swap" />
-    <link rel="stylesheet" href="/styles.css?v=74" />
-    <script src="/interactions.js?v=74" defer></script>
+    <link rel="stylesheet" href="/styles.css?v=75" />
+    <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+    <script src="/interactions.js?v=75" defer></script>
   </head>
   <body class="is-loading">
     <div class="cursor-dot" aria-hidden="true"></div>
@@ -42,6 +43,13 @@
             </nav>
           </div>
         </div>
+      </section>
+      <section class="spline-scroll-sequence" aria-label="스크롤로 진행되는 3D 애니메이션">
+        <div class="hero-spline-frame" aria-label="마우스와 스크롤에 반응하는 3D 애니메이션">
+          <spline-viewer url="https://prod.spline.design/XVAZc2MLlIN1afBk/scene.splinecode" events-target="global"></spline-viewer>
+        </div>
+        <span class="sr-only" data-spline-state="1">3D 애니메이션 첫 번째 상태</span>
+        <span class="sr-only" data-spline-state="2">3D 애니메이션 두 번째 상태</span>
       </section>
     </main>
   </body>

@@ -225,7 +225,7 @@ button { padding: 0; border: 0; background: none; }
   width: 0.37037vw;
   height: 0.37037vw;
   border-radius: 50%;
-  background: #000;
+  background: #bbdbf4;
   transform: translate(-50%, -50%);
   transition: top 90ms linear;
 }
@@ -254,9 +254,36 @@ button { padding: 0; border: 0; background: none; }
   white-space: nowrap;
 }
 .hero-70-menu nav span,
-.hero-70-menu nav a { padding-block: 0; transition: background 160ms ease; }
+.hero-70-menu nav a {
+  padding-top: 0.138889vw;
+  padding-bottom: 0;
+  transition: background 160ms ease;
+}
 .hero-70-menu nav span:hover,
 .hero-70-menu nav a:hover { background: rgba(187, 219, 244, .5); }
+.hero-spline-frame {
+  position: sticky;
+  z-index: 3;
+  top: calc(50vh - 5.520833vw);
+  width: 10.416667vw;
+  height: 11.041667vw;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #d9d9d9;
+}
+.hero-spline-frame spline-viewer {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.spline-scroll-sequence {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  min-height: calc(200vh + 14.166667vw);
+  margin-top: -14.166667vw;
+  background: #f8f8ff;
+}
 .sr-only {
   position: absolute;
   width: 1px;
