@@ -140,7 +140,7 @@ button { padding: 0; border: 0; background: none; }
 .hero-70-photo {
   position: absolute;
   left: 12.5%;
-  top: 21.191406%;
+  top: 10.15625%;
   display: block;
   width: 75.050208%;
   height: 56.933594%;
@@ -264,12 +264,12 @@ button { padding: 0; border: 0; background: none; }
 .hero-spline-frame {
   position: sticky;
   z-index: 3;
-  top: calc(50vh - 5.520833vw);
+  top: calc(50vh - 5.208333vw);
   width: 10.416667vw;
-  height: 11.041667vw;
+  height: 10.416667vw;
   margin: 0 auto;
   overflow: hidden;
-  background: #d9d9d9;
+  background: transparent;
 }
 .hero-spline-frame spline-viewer {
   display: block;
@@ -280,8 +280,8 @@ button { padding: 0; border: 0; background: none; }
   position: relative;
   z-index: 3;
   width: 100%;
-  min-height: calc(200vh + 14.166667vw);
-  margin-top: -14.166667vw;
+  min-height: calc(200vh + 15.868056vw);
+  margin-top: -15.868056vw;
   background: #f8f8ff;
 }
 .sr-only {
