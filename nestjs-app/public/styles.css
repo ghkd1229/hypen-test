@@ -148,6 +148,21 @@ button { padding: 0; border: 0; background: none; }
   object-position: center;
   pointer-events: none;
 }
+.hero-70-spline {
+  position: absolute;
+  z-index: 1;
+  left: 12.5%;
+  top: 10.15625%;
+  width: 75.050208%;
+  height: 56.933594%;
+  overflow: visible;
+  pointer-events: auto;
+}
+.hero-70-spline spline-viewer {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .hero-70-ui {
   position: absolute;
   z-index: 2;
@@ -261,30 +276,6 @@ button { padding: 0; border: 0; background: none; }
 }
 .hero-70-menu nav span:hover,
 .hero-70-menu nav a:hover { background: rgba(187, 219, 244, .5); }
-.hero-spline-frame {
-  position: relative;
-  z-index: 3;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  margin: 0 auto;
-  overflow: hidden;
-  background: transparent;
-}
-.hero-spline-frame spline-viewer {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.spline-scroll-sequence {
-  position: relative;
-  z-index: 3;
-  width: 100%;
-  height: 100vh;
-  min-height: 100vh;
-  margin-top: 0;
-  background: #f8f8ff;
-}
 .sr-only {
   position: absolute;
   width: 1px;
