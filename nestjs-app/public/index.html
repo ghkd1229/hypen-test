@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;500;600&family=Roboto+Mono:wght@400&display=swap" />
-    <link rel="stylesheet" href="/styles.css?v=86" />
+    <link rel="stylesheet" href="/styles.css?v=87" />
+    <script type="module" src="/connection-scroll.js?v=1"></script>
     <script src="/interactions.js?v=75" defer></script>
   </head>
   <body class="is-loading">
@@ -22,9 +23,30 @@
     </div>
 
     <main class="site-stage">
-      <section class="hero hero-70" id="home" aria-labelledby="hero-title">
+      <div class="connection-scroll-shell">
+        <section class="hero hero-70" id="home" aria-labelledby="hero-title">
         <h1 id="hero-title" class="sr-only">Hwang Tae Hee Portfolio</h1>
         <img class="hero-70-photo" src="/images/hero-70-photo.png" alt="손과 실로 구성된 Hwang Tae Hee 포트폴리오 히어로 디자인" />
+        <svg class="connection-graphic" viewBox="0 0 600 600" role="img" aria-label="스크롤에 따라 연결되는 곡선 구조">
+          <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path class="connection-path" d="M84 300C84 174 180 88 300 88S516 174 516 300 420 512 300 512 84 426 84 300Z" />
+            <path class="connection-path" d="M300 72C424 72 500 176 500 300S424 528 300 528 100 424 100 300 176 72 300 72Z" />
+            <path class="connection-path" d="M112 210C204 92 396 92 488 210S474 462 300 510 20 328 112 210Z" />
+            <path class="connection-path" d="M112 390C204 508 396 508 488 390S474 138 300 90 20 272 112 390Z" />
+            <path class="connection-path" d="M164 102C278 40 458 138 490 276S392 538 248 514 50 318 92 198 164 102 164 102Z" />
+            <path class="connection-path" d="M436 102C322 40 142 138 110 276S208 538 352 514 550 318 508 198 436 102 436 102Z" />
+            <path class="connection-path" d="M76 264C152 144 286 106 410 150S556 350 472 454 230 532 128 438 20 352 76 264Z" />
+            <path class="connection-path" d="M524 264C448 144 314 106 190 150S44 350 128 454 370 532 472 438 580 352 524 264Z" />
+            <path class="connection-path" d="M144 124C258 194 332 82 442 154S488 354 402 454 194 514 116 410 30 228 144 124Z" />
+            <path class="connection-path" d="M456 124C342 194 268 82 158 154S112 354 198 454 406 514 484 410 570 228 456 124Z" />
+            <path class="connection-path" d="M86 332C188 244 210 104 338 92S544 226 500 360 332 536 204 484 18 420 86 332Z" />
+            <path class="connection-path" d="M514 332C412 244 390 104 262 92S56 226 100 360 268 536 396 484 582 420 514 332Z" />
+            <path class="connection-path" d="M176 78C238 210 362 210 424 78M176 522C238 390 362 390 424 522M78 176C210 238 210 362 78 424M522 176C390 238 390 362 522 424" />
+            <path class="connection-path" d="M114 144C242 132 250 266 300 300S358 468 486 456M486 144C358 132 350 266 300 300S242 468 114 456" />
+            <path class="connection-path" d="M92 300C180 222 224 154 300 154S420 222 508 300C420 378 376 446 300 446S180 378 92 300Z" />
+            <path class="connection-path" d="M300 92C222 180 154 224 154 300S222 420 300 508C378 420 446 376 446 300S378 180 300 92Z" />
+          </g>
+        </svg>
         <div class="hero-70-ui">
           <div class="hero-70-top">
             <img class="hero-70-logo" src="/images/hero-70-logo.svg" alt="Hwang Tae Hee 로고" />
@@ -42,7 +64,8 @@
             </nav>
           </div>
         </div>
-      </section>
+        </section>
+      </div>
     </main>
   </body>
 </html>

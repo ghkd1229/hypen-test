@@ -129,10 +129,16 @@ button { padding: 0; border: 0; background: none; }
 .copy-status.is-visible { opacity: 1; }
 
 .site-stage { position: relative; width: 100%; background: white; }
+.connection-scroll-shell {
+  position: relative;
+  min-height: calc(100vh + 71.111111vw);
+  background: #f8f8ff;
+}
 .structural-page { position: relative; width: 100%; overflow: hidden; background: white; }
 .hero { aspect-ratio: 1440 / 1024; }
 .hero-70 {
-  position: relative;
+  position: sticky;
+  top: 0;
   width: 100%;
   overflow: hidden;
   background: #f8f8ff;
@@ -147,6 +153,23 @@ button { padding: 0; border: 0; background: none; }
   object-fit: cover;
   object-position: center;
   pointer-events: none;
+}
+.connection-graphic {
+  position: absolute;
+  z-index: 1;
+  left: 34%;
+  top: 15.5%;
+  width: 32%;
+  aspect-ratio: 1;
+  overflow: visible;
+  color: #f8f8ff;
+  pointer-events: none;
+}
+.connection-path {
+  opacity: 0;
+  stroke-width: 1.15;
+  transform-box: fill-box;
+  transform-origin: center;
 }
 .hero-70-ui {
   position: absolute;
