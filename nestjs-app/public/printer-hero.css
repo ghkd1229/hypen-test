@@ -25,11 +25,11 @@
 .resume-tools img { width:88px; height:18.38px; object-fit:contain; }
 .resume-tools > div:first-of-type img { width:94.65px; }
 .resume-social { margin:48px 0 0; font:15.62px RIDIBatang,serif; text-align:center; opacity:.35; }
-.printer-cue { position:absolute; z-index:4; left:50%; top:56.93%; width:4.375%; height:17.7734%; transform:translate(-50%,-50%); opacity:var(--cue-opacity); }
+.printer-cue { position:absolute; z-index:4; left:50%; top:56.93%; width:auto; height:clamp(110px,17.7734svh,182px); aspect-ratio:63 / 182; transform:translate(-50%,-50%); opacity:var(--cue-opacity); }
 .printer-cue object { display:block; width:100%; height:100%; pointer-events:none; }
 @media(max-aspect-ratio:1/1) {
 .printer-nav { top:24px; left:24px; gap:22px; }
-.printer-cue { width:38px; height:110px; }
+.printer-cue { width:auto; height:110px; aspect-ratio:63 / 182; }
 }
 /* Use the supplied artwork directly, without re-rendering its typography. */
 .printer-resume { padding:0; height:auto; aspect-ratio:616 / 871; background:transparent; }

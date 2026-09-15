@@ -1,0 +1,8 @@
+.contact-copy{position:relative;display:inline-grid;place-items:center;border:0;padding:0;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;cursor:pointer}
+.contact-label,.contact-check{grid-area:1/1;transition:opacity .18s ease,transform .18s ease}
+.contact-check{opacity:0;transform:scale(.7);font-size:1.3em;line-height:1}
+.contact-copy.is-copied .contact-label{opacity:0}
+.contact-copy.is-copied .contact-check{opacity:1;transform:scale(1)}
+.contact-copy:focus-visible{outline:1px solid currentColor;outline-offset:5px}
+.contact-status{position:fixed;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(prefers-reduced-motion:reduce){.contact-label,.contact-check{transition:none}}
