@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/dm-sans-500.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Hepta Slab';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/hepta-slab-500.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Kiwi Maru';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/kiwi-maru-400.ttf) format('truetype');
+}
+

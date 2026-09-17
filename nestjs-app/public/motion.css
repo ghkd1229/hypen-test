@@ -1,0 +1,93 @@
+.motion-page {
+  --paper: #ecff26;
+  --ink: #000;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: auto;
+  font-family: 'Kiwi Maru', serif;
+  overflow-anchor: none;
+}
+.motion-page a, .motion-page button { cursor: pointer; }
+.motion-page :focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
+.motion-page main { min-height: 145vw; }
+.motion-back { position: absolute; z-index: 2; top: 28px; left: 3.9583%; font: 14px 'DM Sans', sans-serif; }
+.motion-heading { position: relative; height: max(120px, 13.8889vw); display: grid; place-items: center; }
+.motion-heading h1 { margin: 0; font: 500 clamp(58px, 7.6389vw, 160px)/1.5 'Hepta Slab', serif; letter-spacing: -.02em; }
+.motion-divider { position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; object-fit: fill; }
+.motion-categories { margin: 0; padding: 1.5278vw 3.9583% 0; font-size: clamp(12px, 1.2922vw, 22px); letter-spacing: -.02em; }
+.motion-stack {
+  /* The static fallback is fully separated; JavaScript enhances the stack. */
+  --overlap: 0px;
+  --gap: 24px;
+  list-style: none;
+  margin: 5.6vw 3.5764% 0;
+  padding: 0;
+  isolation: isolate;
+}
+.motion-item { position: relative; margin: 0; padding: 0; }
+.motion-item + .motion-item { margin-top: calc(var(--gap) - var(--overlap)); }
+.motion-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 1337 / 429;
+  transform: translateY(0) scale(1);
+  transform-origin: center;
+  transition: transform 420ms cubic-bezier(.22, 1, .36, 1), filter 420ms ease;
+  /* Match the transparent edges of the exact Figma export for hit testing. */
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%);
+  -webkit-tap-highlight-color: transparent;
+}
+.motion-card img { display: block; width: 100%; height: 100%; object-fit: fill; pointer-events: none; }
+.motion-card-label {
+  position: absolute; left: 10%; right: 10%; top: 18px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 16px;
+  background: #ecff26;
+  font: 500 14px 'DM Sans', sans-serif;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 180ms ease, transform 220ms ease;
+  pointer-events: none;
+}
+.motion-item:focus-within { z-index: 10; }
+.motion-card:focus-visible { outline: none; filter: brightness(1.06); transform: translateY(-6px) scale(1.035); }
+.motion-card:focus-visible .motion-card-label { opacity: 1; transform: none; outline: 2px solid #000; }
+@media (hover: hover) and (pointer: fine) {
+  .motion-item:hover { z-index: 10; }
+  .motion-card:hover { transform: translateY(-8px) scale(1.035); filter: brightness(1.06); }
+  .motion-card:hover .motion-card-label { opacity: 1; transform: none; }
+}
+.motion-card:active { transform: scale(.99); }
+.motion-footer { display: flex; justify-content: space-between; gap: 20px; margin: 7vw 3.9583% 0; padding: 24px 0; border-top: 1px solid #000; font: 14px 'DM Sans', sans-serif; }
+/* The detail view presents the same artwork as a front-facing rectangle. */
+.motion-detail main { min-height: calc(100svh - 140px); }
+.motion-detail-nav { display: flex; justify-content: space-between; gap: 24px; padding: 28px 3.9583%; border-bottom: 1px solid #000; font: 14px 'DM Sans', sans-serif; }
+.motion-project-header { padding: 5vw 3.9583% 3vw; }
+.motion-project-header p { margin: 0 0 14px; font-size: 14px; }
+.motion-project-header h1 { margin: 0; font: 500 clamp(44px, 7.6389vw, 110px)/1.2 'Hepta Slab', serif; letter-spacing: -.03em; }
+.motion-project-art { margin: 0 3.5764%; }
+.motion-project-frame { aspect-ratio: 1337 / 429; overflow: hidden; }
+.motion-project-art img { display: block; width: 100%; height: 100%; transform-origin: 0 0; }
+.motion-project-art figcaption { margin: 18px 0 0; font-size: 13px; }
+.motion-project-info { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin: 5vw 3.9583% 0; padding-top: 24px; border-top: 1px solid #000; }
+.motion-project-info h2 { margin: 0; font: 500 20px 'DM Sans', sans-serif; }
+.motion-project-info p { margin: 0; font: 16px/1.8 sans-serif; word-break: keep-all; }
+.motion-project-video { display: block; width: 100%; max-height: 75svh; margin-top: 24px; background: #000; }
+.motion-project-video[hidden] { display: none; }
+.motion-project-links { display: flex; justify-content: space-between; gap: 24px; margin: 5vw 3.9583% 0; font: 14px 'DM Sans', sans-serif; }
+@media (max-width: 600px) {
+  .motion-back { top: 15px; font-size: 12px; }
+  .motion-heading { padding-top: 16px; }
+  .motion-categories { padding-top: 16px; }
+  .motion-stack { margin-top: 44px; }
+  .motion-page main { min-height: calc(100svh - 100px); }
+  .motion-card-label { top: 8px; padding: 6px 10px; font-size: 12px; }
+  .motion-footer { margin-top: 70px; font-size: 12px; }
+  .motion-project-header { padding-top: 40px; padding-bottom: 30px; }
+  .motion-project-info { grid-template-columns: 1fr; margin-top: 40px; }
+  .motion-project-links { margin-top: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-card, .motion-card-label { transition: none; }
+  .motion-card:hover, .motion-card:focus-visible, .motion-card:active { transform: none; }
+}
